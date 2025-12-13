@@ -1,13 +1,10 @@
 FROM nginx:mainline-alpine
 
-ENV TZ='Asia/Tokyo'
 ARG P12_PASS="password"
-ENV CERT_DIR="/usr/local/share/mtls"
+ENV CERT_DIR="/usr/local/share/cert"
 
 RUN apk upgrade
-RUN apk add bash tzdata vim
-
-RUN ln -s /usr/share/zoneinfo/$TZ /etc/localtime
+RUN apk add bash openssl vim
 
 COPY ["nginx/config/mime-append.types", "/etc/nginx/mime-append.types"]
 COPY ["nginx/sites", "/usr/local/share/sites/"]
@@ -20,8 +17,9 @@ RUN chmod +x /usr/local/bin/*
 
 # 各種証明書の作成
 WORKDIR ${CERT_DIR}
-COPY ["nginx/config/openssl-append.ini", "/usr/lib/openssl.cnf"]
-RUN cat /usr/lib/openssl.cnf >> /usr/lib/ssl/openssl.cnf
+COPY ["nginx/config/openssl-append.ini", "/usr/local/lib/openssl.cnf"]
+RUN mkdir -p /usr/lib/ssl ${CERT_DIR}
+RUN cat /usr/local/lib/openssl.cnf >> /etc/ssl/openssl.cnf
 # CA証明書
 RUN openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:secp384r1 -keyout ${CERT_DIR}/ca.key -noenc -out ${CERT_DIR}/ca.crt -subj="/CN=CA"
 # サーバー証明書
