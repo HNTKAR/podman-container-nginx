@@ -5,7 +5,7 @@ cp -rf /usr/local/share/sites/* /V/sites/
 chown -R $(id -u nginx):$(id -u nginx) /V/{cert,conf,logs,sites}
 chmod -R 777 /V/{cert,conf,logs,sites}
 
-cp /usr/local/share/cert/* /V/cert/
+cp -rn /usr/local/share/cert/* /V/cert/
 
 touch /usr/local/bin/additional.sh
 chmod +x /usr/local/bin/additional.sh
