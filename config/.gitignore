@@ -3,3 +3,4 @@
 !_.conf
 !.gitignore
 !nginx-user.conf
+!openssl-append.ini
