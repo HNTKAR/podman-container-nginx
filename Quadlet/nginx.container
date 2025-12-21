@@ -3,7 +3,7 @@ ServiceName=podman_container_nginx
 ContainerName=nginx
 Image=localhost/nginx
 AutoUpdate=local
-Port=8080:80
-Port=8443:443
+Port=8080:8080
+Port=8443:8443
 Mount=type=volume,source=nginx.volume,destination=/V
 
