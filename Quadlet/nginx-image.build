@@ -1,8 +1,0 @@
-[Service]
-Environment=REPO=HNTKAR
-[Build]
-ImageTag=nginx
-ServiceName=podman_build_nginx
-SetWorkingDirectory=https://github.com/${REPO}/podman-container-web
-.git
-File=nginx/Dockerfile

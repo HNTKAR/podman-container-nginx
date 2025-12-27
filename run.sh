@@ -1,9 +1,11 @@
 #!/bin/bash
 
-mkdir -p /V/{conf,logs,sites}
+mkdir -p /V/{cert,conf,logs,sites}
 cp -rf /usr/local/share/sites/* /V/sites/
-chown -R $(id -u nginx):$(id -u nginx) /V/{conf,logs,sites}
-chmod -R 777 /V/{conf,logs,sites}
+chown -R $(id -u nginx):$(id -u nginx) /V/{cert,conf,logs,sites}
+chmod -R 777 /V/{cert,conf,logs,sites}
+
+cp -rn /usr/local/share/cert/* /V/cert/
 
 touch /usr/local/bin/additional.sh
 chmod +x /usr/local/bin/additional.sh

@@ -6,18 +6,18 @@ ENV CERT_DIR="/usr/local/share/cert"
 RUN apk upgrade
 RUN apk add bash openssl vim
 
-COPY ["nginx/config/mime-append.types", "/etc/nginx/mime-append.types"]
-COPY ["nginx/sites", "/usr/local/share/sites/"]
+COPY ["config/mime-append.types", "/etc/nginx/mime-append.types"]
+COPY ["sites", "/usr/local/share/sites/"]
 
-COPY ["nginx/config/*.conf", "/usr/local/lib/conf/"]
+COPY ["config/*.conf", "/usr/local/lib/conf/"]
 RUN mv /usr/local/lib/conf/nginx-user.conf /etc/nginx/nginx-user.conf
 
-COPY ["nginx/*.sh","nginx/certmgr", "/usr/local/bin/"]
+COPY ["*.sh","certmgr", "/usr/local/bin/"]
 RUN chmod +x /usr/local/bin/*
 
 # 各種証明書の作成
 WORKDIR ${CERT_DIR}
-COPY ["nginx/config/openssl-append.ini", "/usr/local/lib/openssl.cnf"]
+COPY ["config/openssl-append.ini", "/usr/local/lib/openssl.cnf"]
 RUN mkdir -p /usr/lib/ssl ${CERT_DIR}
 RUN cat /usr/local/lib/openssl.cnf >> /etc/ssl/openssl.cnf
 # CA証明書
