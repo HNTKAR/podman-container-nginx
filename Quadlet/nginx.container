@@ -6,4 +6,7 @@ AutoUpdate=local
 PublishPort=8080:8080
 PublishPort=8443:8443
 Mount=type=volume,source=nginx.volume,destination=/V
+Mount=type=bind,source=/home/podman/run,destination=/run/podman
 
+[Service]
+ExecStartPre=mkdir -p /home/podman/run
