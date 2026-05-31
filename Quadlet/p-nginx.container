@@ -1,0 +1,10 @@
+[Unit]
+Description=Nginx Container
+
+[Container]
+ServiceName=pc-nginx
+ContainerName=nginx
+Image=p-nginx.build
+
+[Install]
+WantedBy=multi-user.target

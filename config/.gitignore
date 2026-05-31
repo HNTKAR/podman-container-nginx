@@ -1,6 +1,0 @@
-*
-!*.types
-!_.s.conf
-!.gitignore
-!nginx-user.conf
-!openssl-append.ini

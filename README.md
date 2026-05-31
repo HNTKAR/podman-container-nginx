@@ -38,3 +38,17 @@ systemctl --user start podman_container_nginx
 podman build --tag nginx --file nginx/Dockerfile .
 podman run --name nginx --publish 8080:8080/tcp --publish 8443:8443/tcp --mount type=volume,source=nginx,destination=/V --detach --replace nginx
 ```
+
+### 証明書の作成方法
+```bash
+cd /usr/local/share/cert
+cat /usr/local/lib/openssl.cnf >> /etc/ssl/openssl.cnf
+# CA証明書
+openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:secp384r1 -keyout ${CERT_DIR}/ca.key -noenc -out ${CERT_DIR}/ca.crt -subj="/CN=CA"
+# サーバー証明書
+certmgr create -p ${P12_PASS} -c ${CERT_DIR} -o ${CERT_DIR} -s "/C=JP/ST=City/O=Org/CN=server" -d 365 -n "server"
+# クライアント証明書
+certmgr create -p ${P12_PASS} -c ${CERT_DIR} -o ${CERT_DIR} -s "/C=JP/ST=City/O=Org/CN=client" -d 365 -n "client"
+# CRL
+openssl ca -gencrl -keyfile ${CERT_DIR}/ca.key -cert ${CERT_DIR}/ca.crt -out ${CERT_DIR}/crl.pem
+```

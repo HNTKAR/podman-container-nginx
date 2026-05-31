@@ -1,0 +1,7 @@
+[Unit]
+Description=Build nginx Container
+
+[Build]
+ImageTag=nginx-common
+ServiceName=pb-nginx-common
+SetWorkingDirectory=WORKING_DIR_PATH
