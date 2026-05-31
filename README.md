@@ -52,3 +52,12 @@ certmgr create -p ${P12_PASS} -c ${CERT_DIR} -o ${CERT_DIR} -s "/C=JP/ST=City/O=
 # CRL
 openssl ca -gencrl -keyfile ${CERT_DIR}/ca.key -cert ${CERT_DIR}/ca.crt -out ${CERT_DIR}/crl.pem
 ```
+
+```bash
+cd /PATH/TO/podman-container-nginx
+./replace.sh
+mkdir -p ~/.config/containers/systemd
+cp tmp/p-* ~/.config/containers/systemd/
+systemctl --user daemon-reload
+systemctl --user restart pc-nginx
+```
