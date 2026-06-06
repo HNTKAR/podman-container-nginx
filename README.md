@@ -59,5 +59,5 @@ cd /PATH/TO/podman-container-nginx
 mkdir -p ~/.config/containers/systemd
 cp tmp/p-* ~/.config/containers/systemd/
 systemctl --user daemon-reload
-systemctl --user restart pc-nginx
+systemctl --user restart pc-nginx-common
 ```

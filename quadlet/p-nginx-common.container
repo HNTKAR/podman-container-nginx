@@ -2,9 +2,9 @@
 Description=Nginx Container
 
 [Container]
-ServiceName=pc-nginx
-ContainerName=nginx
-Image=p-nginx.build
+ServiceName=pc-nginx-common
+ContainerName=nginx-common
+Image=p-nginx-common.build
 
 [Install]
 WantedBy=multi-user.target
